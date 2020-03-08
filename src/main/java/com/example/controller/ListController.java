@@ -28,9 +28,7 @@ public class ListController {
             listOperations.leftPushAll("redis_list",list);
         }
 
-
 //        listOperations.rightPush("redis_list",string);
-
         Long size = listOperations.size("redis_list"); // list如果不存在,返回0
         List<String> all = listOperations.range("redis_list", 0, -1); // 查询全部
         List<String> redis_list = listOperations.range("redis_list", 0, 2); // 查询前2个元素
@@ -40,10 +38,9 @@ public class ListController {
     @ResponseBody
     @RequestMapping("/list")
     public List<String> list(){
-        List<String> redis_list = getList();
-        return redis_list;
+        return getList();
     }
-
+    // 获取list的方法
     public List<String> getList(){
         ListOperations<String, String> listOperations = stringRedisTemplate.opsForList();
         List<String> redis_list = listOperations.range("redis_list", 0, -1);
